@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+   
+}
+body{
+    background-color: rgb(244, 242, 242);
+   
+  }
+.viewmain {
+    background-color: white;
+    width: 50%;
+    height: 350px;
+    margin-left: 20%;
+    display: flex;
+    border-radius: 6px;
+    
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.main-content {
+    margin: 30px 0px 0px 30px;
+    line-height: 16px;
+}
+.main-content h2 {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.703);
+}
+.main-content p {
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.579);
+}
+span {
+    color: rgba(0, 0, 0, 0.55);
+}
+.designation{
+    margin-left: 20px;
+}
+.image-side1 img {
+    margin-top: 32px;
+    width: 130px;
+    height: 135px;
+    border-radius: 5px;
+}
+.image-side p {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.582);
+     text-align: center; 
+}
+.main-content p {
+    margin-left: 20px;
+    text-align: start;
+}
+.main-content h5 {
+    color: rgba(0, 0, 0, 0.687);
+    font-weight: 500;
+}
+.icon {
+   margin-left: -22px;
+   margin-right: 18px;
+   color: blue;
+}
+.content-one p{
+    margin-top: 15px;
+}
+.content-two {
+    margin-top: 15px;
+}
+.content-two p {
+    margin-top: 5px;
+}
+.button-side {
+    margin-top: 201px;
+    margin-right: 11px;
+}
+button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+.btn-update {
+    background-color: rgba(0, 100, 0, 0.98);
+    
+}
+.btn-delete {
+    background-color: darkred;
+    /* margin-left: 20px; */
+} 
