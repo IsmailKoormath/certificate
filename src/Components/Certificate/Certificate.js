@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { FaAward, IconName } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { mainCertificate } from "../../Store/students/useApi";
 import Star from "../Star/Star";
 
 const Certificate = () => {
+// const [model,setModal]=useState(false)
+const params = useParams()
+const dispatch = useDispatch()
+
+// useEffect(() => {
+//   setModal(true);
+// }, [setModal]);
+
+const {Certificate,loading}=useSelector((state)=>({
+Certificate:state.createReducer?.studentCertificate,
+loading:state.createReducer?.loading
+}))
+
+useEffect(()=>{
+  dispatch(mainCertificate(params.id))
+},[dispatch])
+
   return (
     <div
       style={{
@@ -44,17 +65,18 @@ const Certificate = () => {
               marginLeft: "60px",
             }}
           >
-            <h4
+            <h5
               className="hello"
               style={{
                 fontSize: "54px",
                 color: "rgb(37, 55, 89)",
                 textAlign: "center",
               }}
-            >
+            > 
               <div className="done" style={{ fontFamily: "fantasy" }}>
                 Certificate
               </div>
+              </h5>
               <h5
                 style={{
                   marginBottom: "15px",
@@ -65,7 +87,7 @@ const Certificate = () => {
                 Of Experience
               </h5>
               <br />
-            </h4>
+            
           </div>
 
           <div
@@ -105,18 +127,18 @@ const Certificate = () => {
                   <div
                     className=""
                     style={{ minWidth: "20px", paddingBottom: "35px" }}
-                  ></div>
+                  > {Certificate?.full_name}</div>
                 </h1>
               </b>
             </div>
 
             <div style={{ fontFamily: "'Josefin Sans'" }}>
               <h5>
-                was employed at{" "}
+                was employed at
                 <b style={{ fontFamily: "cursive", fontSize: "16px" }}>
                   Xanthrone e-solutions
-                </b>{" "}
-                as a{" "}
+                </b>
+                as a
                 <b
                   className="font"
                   style={{
@@ -136,15 +158,15 @@ const Certificate = () => {
                     minWidth: "5px",
                     fontFamily: "Josefin Sans",
                   }}
-                ></b>
+                >{Certificate?.start_date}</b>
                 <b
                   style={{
                     fontSize: "20px",
                     minWidth: "5px",
                   }}
                 >
-                  {" "}
-                  to{" "}
+                  
+                  to {Certificate?.end_date},
                 </b>
                 while showcasing aprofessional<br></br> commandable work
                 attitude throughout the specified time period.

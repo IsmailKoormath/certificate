@@ -19,6 +19,9 @@ import {
   GET_STUDENT_COURSE_REQUEST,
   GET_STUDENT_COURSE_SUCCESS,
   GET_STUDENT_COURSE_FAIL,
+  STUDENT_CERTIFICATE_REQUEST,
+  STUDENT_CERTIFICATE_SUCCESS,
+  STUDENT_CERTIFICATE_FAIL,
 } from "./actionType";
 export const createRequest = (input) => ({
   type: CREATE_REQUEST,
@@ -108,12 +111,14 @@ export const deleteStudentFail = (error) => ({
 
 //---------------------create student's course-------------------------------//
 
-export const createStudentCourseRequest = (stdCourse)=>({
+export const createStudentCourseRequest = (stdCourse)=>(
+  console.log(stdCourse),{
   type:CREATE_STUDENT_COURSE_REQUEST,
   payload:stdCourse
 })
 
-export const createStudentCourseSuccess =(studentCourse)=>({
+export const createStudentCourseSuccess =(studentCourse)=>(
+ {
 type:CREATE_STUDENT_COURSE_SUCCESS,
 payload:studentCourse
 })
@@ -158,5 +163,21 @@ export const deleteStudentCourseSuccess = (id) => ({
 
 export const deleteStudentCourseFail = (error) => ({
   type: DELETE_STUDENT_COURSE_FAIL,
+  payload: error,
+});
+
+
+//-----------------show student details in certificate----------------------//
+
+export const studentCertificateRequest = () => ({
+  type: STUDENT_CERTIFICATE_REQUEST,
+  payload: "",
+});
+export const studentCertificateSuccess = (studentCertificate) => ({
+  type: STUDENT_CERTIFICATE_SUCCESS,
+  payload: studentCertificate,
+});
+export const studentCertificateFail = (error) => ({
+  type: STUDENT_CERTIFICATE_FAIL,
   payload: error,
 });

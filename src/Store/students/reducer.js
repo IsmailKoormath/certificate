@@ -24,6 +24,9 @@ import {
   DELETE_STUDENT_COURSE_REQUEST,
   DELETE_STUDENT_COURSE_SUCCESS,
   DELETE_STUDENT_COURSE_FAIL,
+  STUDENT_CERTIFICATE_REQUEST,
+  STUDENT_CERTIFICATE_SUCCESS,
+  STUDENT_CERTIFICATE_FAIL,
 } from "./actionType";
 
 const initialState = {
@@ -37,8 +40,9 @@ const initialState = {
   studentCourse: {},
   studentCourseData: {},
   studentCourseDelete: {},
+  studentCertificate: {},
   
-  //    studentCertificate: [],
+ 
 };
 
 const CreateReducer = (state = initialState, action) => {
@@ -219,6 +223,29 @@ const CreateReducer = (state = initialState, action) => {
       };
 
     case DELETE_STUDENT_COURSE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+         // show student details in certificate //
+
+    case STUDENT_CERTIFICATE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case STUDENT_CERTIFICATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        studentCertificate: action.payload,
+        error: "",
+      };
+
+    case STUDENT_CERTIFICATE_FAIL:
       return {
         ...state,
         loading: false,

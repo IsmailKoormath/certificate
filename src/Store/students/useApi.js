@@ -23,6 +23,9 @@ import {
   getStudentCourseRequest,
   getStudentCourseSuccess,
   getStudentCourseFail,
+  studentCertificateRequest,
+  studentCertificateSuccess,
+  studentCertificateFail,
 } from "./action";
 import { axiosApi } from "../AxiosMethod";
 import { create } from "lodash";
@@ -121,14 +124,20 @@ export const deleteStudentApi = (studentId, navigate) => {
 
 //---------------------create student's course-------------------------------//
 
-export const createStudentCourseApi = (navigate, stdCourse) => {
+export const createStudentCourseApi = (navigate, stdCourse ) =>  {
+  console.log(stdCourse);
   return async (dispatch) => {
     dispatch(createStudentCourseRequest(stdCourse));
+    console.log(stdCourse);
+
+    // console.log(stdCourse);
+
 
     try {
       const user = await axiosApi.post(`/student/student_course/`, stdCourse);
       dispatch(createStudentCourseSuccess(user.data));
-      navigate("/studentsCourse");
+      console.log(user.data);
+      navigate("/studentscourse");
     } catch (error) {
       console.log(error);
       dispatch(createStudentCourseFail(error?.response?.data));
@@ -163,13 +172,28 @@ export const deleteStudentCourseApi = (id, navigate) => {
     dispatch(deleteStudentCourseRequest());
 
     try {
-const user = await axiosApi.delete(`/student/student_course/${id}`)
-dispatch(deleteStudentCourseSuccess(id))
-navigate("/studentscourse")
-    }
-    catch(error){
+      const user = await axiosApi.delete(`/student/student_course/${id}`);
+      dispatch(deleteStudentCourseSuccess(id));
+      navigate("/studentscourse");
+    } catch (error) {
       console.log(error);
       dispatch(deleteStudentCourseFail(error.response?.data));
+    }
+  };
+};
+
+// show student details in certificate //
+
+export const mainCertificate = (id)=>{
+  return async (dispatch)=>{
+    dispatch(studentCertificateRequest())
+
+    try{
+      const res = await axiosApi.get(`/student/student/${id}`)
+      dispatch(studentCertificateSuccess(res.data))
+    }
+    catch(error){
+      dispatch(studentCertificateFail(error?.response?.data))
     }
   }
 }

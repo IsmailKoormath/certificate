@@ -109,7 +109,7 @@ const StudentView = () => {
                         >
                           <Link
                             style={{ textDecoration: "none", color: "white" }}
-                            to="/createcource"
+                            to="/createstudentcourse"
                           >
                             + Create Students Course
                           </Link>
