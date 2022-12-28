@@ -1,15 +1,22 @@
 import React from 'react'
 import { Rating } from 'react-simple-star-rating'
 import { Button } from 'react-bootstrap';
+import Border from "../../Images/border.png";
+// import { transform } from 'lodash';
 const Star = () => {
+const print=()=>{
+  window.print()
+}
+
   return (
-    <div className="rating">
+    <div className="rating" style={{size:"a4", display:"flex",flexDirection:"column"}}>
       <img
-        style={{ marginLeft: "60%" ,marginTop:"80px"}}
-        src=""
+        style={{  width:"300px"}}
+        src={Border}
         className="d-flex justify-content-end"
       />
-      <div style={{ marginLeft: "100px", paddingBottom: "40px", }}>
+      <div style={{marginLeft:"50px"}}>
+      <div style={{ marginLeft: "140px", paddingBottom: "40px",marginTop:"-100px" }}>
         <h2 className="center" style={{ marginLeft: "110px",  color: "rgb(37, 55, 89)",}}>
           
           ScoreCard
@@ -25,24 +32,19 @@ const Star = () => {
         >
           Web Application Developer
         </h2>
-        <h1 className="center">
-          <span style={{ marginLeft: "84px" }}>
-           
-            <Rating />
-          </span>
-        </h1>
+        
       </div>
       <div style={{ marginLeft: "115px",marginBottom:"6px" }}>
         <div className="d-flex">
           <h5 style={{fontFamily:"Josefin Sans"}} >HTML </h5>
-          <span style={{ marginLeft: "150px" }}>
-            
+          <span style={{ marginLeft: "140px" }}>
+          <Rating />
           </span>
         </div>
 
         <div className="d-flex">
           <h5 style={{fontFamily:"Josefin Sans"}}>CSS</h5>
-          <span style={{ marginLeft: "170px" }}>
+          <span style={{ marginLeft: "160px" }}>
             <Rating />
           </span>
         </div>
@@ -63,21 +65,21 @@ const Star = () => {
 
         <div className="d-flex">
           <h5 style={{fontFamily:"Josefin Sans"}}>jQuery</h5>
-          <span style={{ marginLeft: "143px" }}>
+          <span style={{ marginLeft: "140px" }}>
             <Rating />
           </span>
         </div>
 
         <div className="d-flex">
           <h5 style={{fontFamily:"Josefin Sans"}}>Bootstrap</h5>
-          <span style={{ marginLeft: "116px" }}>
+          <span style={{ marginLeft: "118px" }}>
             <Rating />
           </span>
         </div>
 
         <div className="d-flex">
           <h5 style={{fontFamily:"Josefin Sans"}}>SASS</h5>
-          <span style={{ marginLeft: "152px" }}>
+          <span style={{ marginLeft: "148px" }}>
             <Rating />
           </span>
         </div>
@@ -89,15 +91,17 @@ const Star = () => {
           </span>
         </div>
       </div>
-      <Button style={{marginLeft:"39rem"}}
+      <Button style={{marginLeft:"14rem",width:"150px"}}
       color="success"
       className="print_hide"
-      
+      onClick={print}
     >
       download the file
     </Button>
+    </div>
       <div className="last-img">
-        <img src="" />
+        <img src={Border}
+         style={{width:"300px",marginTop:"", marginLeft:"450px", transform:"rotate(180deg)" }}/>
       </div>
     </div>
   )

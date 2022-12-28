@@ -87,3 +87,9 @@ button {
     background-color: darkred;
     /* margin-left: 20px; */
 } 
+
+.stdcourse{
+    width: 610px;
+    text-align: center;
+    margin-right: 100px;
+}

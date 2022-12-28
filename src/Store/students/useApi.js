@@ -124,7 +124,7 @@ export const deleteStudentApi = (studentId, navigate) => {
 
 //---------------------create student's course-------------------------------//
 
-export const createStudentCourseApi = (navigate, stdCourse ) =>  {
+export const createStudentCourseApi = (navigate, stdCourse,catId ) =>  {
   console.log(stdCourse);
   return async (dispatch) => {
     dispatch(createStudentCourseRequest(stdCourse));
@@ -137,7 +137,7 @@ export const createStudentCourseApi = (navigate, stdCourse ) =>  {
       const user = await axiosApi.post(`/student/student_course/`, stdCourse);
       dispatch(createStudentCourseSuccess(user.data));
       console.log(user.data);
-      navigate("/studentscourse");
+      navigate("/students");
     } catch (error) {
       console.log(error);
       dispatch(createStudentCourseFail(error?.response?.data));
@@ -190,6 +190,7 @@ export const mainCertificate = (id)=>{
 
     try{
       const res = await axiosApi.get(`/student/student/${id}`)
+      console.log(res);
       dispatch(studentCertificateSuccess(res.data))
     }
     catch(error){

@@ -35,7 +35,7 @@ const StudentView = () => {
   return (
     <>
       <Layout>
-        <div className="viewmain">
+        <div className="viewmain shadow rounded g-5 mt-5">
           <div className="main-content">
             <div className="content-one">
               <h2>{singleView.full_name}</h2>
@@ -98,13 +98,13 @@ const StudentView = () => {
        
         <div className="container">
         
-          <div className="row justify-content-center">
-            <div className="col-sm-6 shadow rounded g-5">
+          <div className="row justify-content-center mx-5  ">
+            <div className="col-sm-6 shadow rounded g-5 stdcourse" style={{background:"white"}}>
               <div className="pt-3 text-dark h2 justifyy-content-spacebetween">
               <h3>STUDENT COURSE</h3>
                 <div>
                 <Button
-                          style={{ padding: "3px 20px 3px 20px" }}
+                          style={{ padding: "3px 20px 3px 20px", marginBottom:"10px"}}
                           color="success"
                         >
                           <Link
@@ -116,20 +116,20 @@ const StudentView = () => {
                         </Button>
                   {map(singleView?.student_courses, (item) => (
                     <div>
-                      <h5>Course Name:-</h5>
+                      <h5>Course Name:</h5>
                       <h2 style={{ color: "red" }}>
                         {item.course.course_name}
                       </h2>
-                      <h5>Duration:- </h5>
+                      <h5>Duration:</h5>
                       <h2 style={{ color: "red" }}>{item.course.duration}</h2>
-                      <h5>Progess:-</h5>
+                      <h5>Progess:</h5>
                       <h2 style={{ color: "red" }}>{item.progress}</h2>
-                      <h5>Course Category Name:-</h5>
+                      <h5>Course Category Name:</h5>
                       <h2 style={{ color: "red" }}>
                       
                         {item.course.course_category.course_category_name}
                       </h2>
-                      <h5>Designation</h5>
+                      <h5>Designation:</h5>
                       <h2 style={{ color: "red" }}>
                        
                         {item.course.course_category.designation}
@@ -147,12 +147,14 @@ const StudentView = () => {
                           color="success"
                           style={{
                             padding: "3px 20px 3px 20px",
+                            marginLeft:"180px"
                           }}
                         >
                           <Link
                             style={{
                               textDecoration: "none",
                               color: "white",
+                              
                             }}
                             to={`/certificate/${params.id}`}
                           >

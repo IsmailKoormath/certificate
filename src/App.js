@@ -18,7 +18,6 @@ import ViewCourseCatagory from "./Components/viewCourseCatagory/viewCourseCatago
 import CreactStudentCourse from "./Components/CreateStudentCourse/CreateStudentCourse"
 import Certificate from "./Components/Certificate/Certificate";
 import Star from "./Components/Star/Star";
-import StudentsCourseView from "./Components/StudentsCourseView/StudentsCourseView";
 
 function App() {
   return (
@@ -60,7 +59,6 @@ function App() {
             element={<ViewCourseCatagory />}
           ></Route>  
           <Route path="/createstudentcourse" element ={<CreactStudentCourse/>}></Route>
-          <Route path="/studentscourse" element ={<StudentsCourseView/>}></Route>
           <Route path="/certificate/:id" element={<Certificate/>}></Route>
           <Route path="/star" element={<Star/>}></Route>
         </Routes>

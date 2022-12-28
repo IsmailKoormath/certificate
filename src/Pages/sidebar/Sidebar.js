@@ -12,8 +12,8 @@ const Sidebar = () => {
   return (
     
      
-    <div className="side-bar">
-      <h6 className="menu">MENU</h6>
+    <div className="side-bar"style={{background:"white"}}>
+      <h6 className="menu" style={{marginBottom:"20px",marginLeft:"20px"}}>MENU</h6>
       <ul>
       
        <li>
@@ -32,8 +32,8 @@ const Sidebar = () => {
       <ul className="list">
         <Link to="/students">
         <li>All Students</li></Link>
-        <Link to="/updatestudents">
-        <li>Update Student</li></Link>
+        {/* <Link to="/updatestudents">
+        <li>Update Student</li></Link> */}
         <Link to="/createstudents">
         <li>Create Student</li></Link>
       </ul>
@@ -49,8 +49,8 @@ const Sidebar = () => {
       <Link to="/allcourse">
         <li>All Courses</li>
         </Link>
-        <Link to="/updatecourse">
-        <li>Update Courses</li></Link>
+        {/* <Link to="/updatecourse">
+        <li>Update Courses</li></Link> */}
         <Link to="/createcource">
         <li>Create Courses</li></Link>
       </ul>
@@ -66,8 +66,8 @@ const Sidebar = () => {
       <Link to="/courcecategorylist">
         <li>All Courses Category</li>
         </Link>
-        <Link to="/Updatecourcecategory">
-        <li>Update Courses Category</li></Link>
+        {/* <Link to="/Updatecourcecategory">
+        <li>Update Courses Category</li></Link> */}
         <Link to="/CourceCategory">
         <li>Create Courses Category</li></Link>
       </ul>

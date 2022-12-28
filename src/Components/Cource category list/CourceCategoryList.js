@@ -19,7 +19,7 @@ const CourceCategoryList = () => {
     dispatch(getCategoryApi());
   }, [dispatch]);
 
-  const courseTable = courseCatagory;
+  const courseTable = courseCatagory?.results;
   console.log(courseTable);
   return (
     <>

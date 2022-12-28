@@ -31,7 +31,7 @@ const Students = () => {
   return (
     <>
       <Layout>
-        <div>
+        <div style={{marginLeft:"20px"}}>
           <h4 style={{ textAlign: "center" }}>STUDENTS</h4>
           <div
             className="table-wrapper"

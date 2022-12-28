@@ -39,7 +39,8 @@ useEffect(()=>{
             maxWidth: "100%",
             whiteSpace: "nowrap",
             backgroundColor: " white",
-            textAlign:"center"
+            textAlign:"center",
+            marginLeft:"20px",marginTop:"20px"
           }}
         >
           <thead>

@@ -42,8 +42,8 @@ const CreateStudentCourse = () => {
 
   const handleSubmitStdCourseCreate = (e) => {
     e.preventDefault();
-  console.log("stdCourse //");
-    dispatch(createStudentCourseApi(navigate,stdCourse));
+  console.log("stdCourse");
+    dispatch(createStudentCourseApi(navigate,stdCourse,catId));
   };
   useEffect(() => {
     dispatch(studentApi());

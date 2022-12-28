@@ -3,22 +3,24 @@ import { FaAward, IconName } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { mainCertificate } from "../../Store/students/useApi";
+import Border from "../../Images/border.png";
 import Star from "../Star/Star";
 
+
 const Certificate = () => {
-// const [model,setModal]=useState(false)
+const [model,setModal]=useState(false)
 const params = useParams()
 const dispatch = useDispatch()
 
-// useEffect(() => {
-//   setModal(true);
-// }, [setModal]);
+useEffect(() => {
+  setModal(true);
+}, [setModal]);
 
-const {Certificate,loading}=useSelector((state)=>({
-Certificate:state.createReducer?.studentCertificate,
+const {studentCertificate,loading}=useSelector((state)=>({
+  studentCertificate:state.CreateReducer?.studentCertificate,
 loading:state.createReducer?.loading
 }))
-
+console.log(studentCertificate);
 useEffect(()=>{
   dispatch(mainCertificate(params.id))
 },[dispatch])
@@ -26,7 +28,11 @@ useEffect(()=>{
   return (
     <div
       style={{
-        size: "a",
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"center",
+        justifyContent:"center",
+        size:"a4"
       }}
     >
       <style>
@@ -41,28 +47,28 @@ useEffect(()=>{
 
       <div className="good">
         <img
-          style={{ marginLeft: "60%" }}
-          src=""
+          style={{ marginLeft: "-50px", width:"300px"}}
+          src={Border}
           className="d-flex justify-content-end"
         />
 
         <div
           style={{
-            position: "absolute",
+            // position: "absolute",
             textAlign: "center",
-            marginLeft: "450px",
-            marginTop: "50px",
+            marginTop:"-100px",
+            // marginTop: "50px",
           }}
         >
-          <img style={{ marginLeft: "5%", width: "20%" }} src="" />
+          {/* <img style={{ marginLeft: "5%", width: "20%" }} src="" /> */}
           <div
             style={{
-              display: "flex",
+              
               alignItems: "center",
               fontStyle: "paratype",
-              marginTop: "10px",
+             
               justifyContent: "center",
-              marginLeft: "60px",
+              // marginLeft: "60px",
             }}
           >
             <h5
@@ -71,6 +77,7 @@ useEffect(()=>{
                 fontSize: "54px",
                 color: "rgb(37, 55, 89)",
                 textAlign: "center",
+                
               }}
             > 
               <div className="done" style={{ fontFamily: "fantasy" }}>
@@ -79,12 +86,12 @@ useEffect(()=>{
               </h5>
               <h5
                 style={{
-                  marginBottom: "15px",
+                
                   fontFamily: "quicksand,san-serif",
                   fontSize: "27px",
                 }}
               >
-                Of Experience
+               Of Experience
               </h5>
               <br />
             
@@ -92,9 +99,9 @@ useEffect(()=>{
 
           <div
             style={{
-              minHeight: "100vh",
+              // minHeight: "100vh",
 
-              marginBottom: "30px",
+              // marginBottom: "30px",
               textAlign: "center",
 
               fontWeight: "500",
@@ -107,7 +114,7 @@ useEffect(()=>{
                   style={{
                     fontWeigt: "400",
                     fontSize: "20px",
-                    marginTop: "30px",
+                    // marginTop: "30px",
                     paddingBottom: "4px",
                   }}
                 >
@@ -127,7 +134,7 @@ useEffect(()=>{
                   <div
                     className=""
                     style={{ minWidth: "20px", paddingBottom: "35px" }}
-                  > {Certificate?.full_name}</div>
+                  > {studentCertificate?.full_name}</div>
                 </h1>
               </b>
             </div>
@@ -158,7 +165,7 @@ useEffect(()=>{
                     minWidth: "5px",
                     fontFamily: "Josefin Sans",
                   }}
-                >{Certificate?.start_date}</b>
+                >{studentCertificate?.start_date}</b>
                 <b
                   style={{
                     fontSize: "20px",
@@ -166,7 +173,7 @@ useEffect(()=>{
                   }}
                 >
                   
-                  to {Certificate?.end_date},
+                  to {studentCertificate?.end_date},
                 </b>
                 while showcasing aprofessional<br></br> commandable work
                 attitude throughout the specified time period.
@@ -192,8 +199,8 @@ useEffect(()=>{
           </div>
         </div>
       </div>
-      <div className="last-img" style={{ marginTop: "500px" }}>
-        <img src="" />
+      <div className="last-img"  >
+        <img src={Border} style={{ width:"300px",marginTop:"-150px", transform: "rotate(180deg)", marginLeft:"450px"  }} />
       </div>
       <Star />
     </div>
