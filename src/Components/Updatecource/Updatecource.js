@@ -4,11 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "reactstrap";
 import Layout from "../../Pages/Layout/Layout";
-import {
-  courseApi,
-  UpdateCourseApi,
-  viewCourseApi,
-} from "../../Store/course/useApi";
+import { updateCourseApi } from "../../Store2/course2/courseSlice";
 
 const Updatecource = () => {
   const navigate = useNavigate();
@@ -19,31 +15,22 @@ const Updatecource = () => {
     course_category_name: "",
     course_name: "",
     duration: "",
-    id: "",
   });
-  const { courseCatagory, loding } = useSelector((state) => ({
-    courseCatagory: state.createCourseCategoryReducer.courseCatagory,
-    loading: state.loading,
+  const { allCategoty, singleCourse ,loding } = useSelector((state) => ({
+    allCategoty: state.category.allCategoty,
+    singleCourse: state.course.singleCourse, 
+    loading: state.course.loading,
+    
   }));
-
-  const { updateCourse, loading, courseSingleView } = useSelector((state) => ({
-    updateCourse: state.CreateCourseReducer.updateCourse,
-    courseSingleView: state.CreateCourseReducer.courseSingleView,
-    loading: state.loading,
-  }));
+console.log(allCategoty);
 
   useEffect(() => {
-    dispatch(viewCourseApi(catId));
-  }, [dispatch]);
+    setStoke(singleCourse);
+  }, []);
 
-  console.log(courseSingleView);
-  useEffect(() => {
-    setStoke(courseSingleView);
-  }, [courseSingleView]);
+  const courseId = params.id;
 
-  const catId = params.id;
-
-  const Handle = (e, catId) => {
+  const Handle = (e) => {
     setStoke({
       ...Stoke,
       [e.target.name]: e.target.value,
@@ -52,7 +39,7 @@ const Updatecource = () => {
 
   const HandleSubmitUpdateCourse = (e) => {
     e.preventDefault();
-    dispatch(UpdateCourseApi(catId,navigate, Stoke));
+    dispatch(updateCourseApi({courseId,navigate, Stoke}));
   };
 
   return (
@@ -100,13 +87,13 @@ const Updatecource = () => {
                     <div className="form-group">
                     <select
                       className="col-form-label"
-                      name="course_category"
+                      name="course_categoryid"
                       id=""
                       onChange={(e) => Handle(e)}
                     >
                       <option>choose course category...</option>
-                      {map(courseCatagory?.results, (item, key) => (
-                        <option value={item.id}>
+                      {map(allCategoty,(item, key) => (
+                        <option key={item?.id}>
                           {item?.course_category_name}
                           
                         </option>

@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Col, Container, Row } from "reactstrap";
 import Layout from "../../Pages/Layout/Layout";
-import { createCourseApi } from "../../Store/course/useApi";
-import { getCategoryApi } from "../../Store/courseCategory/useApi";
+import { createCourseApi } from "../../Store2/course2/courseSlice";
+import { categoryApi } from "../../Store2/courseCategory2/courseCategorySlice";
 
 const Createcource = () => {
   const dispatch = useDispatch();
@@ -22,21 +22,16 @@ const Createcource = () => {
 
   const handleSubmitCreateCourse = (e) => {
     e.preventDefault();
-
     if (input) {
-      dispatch(createCourseApi(input, navigate));
+      dispatch(createCourseApi({input, navigate}));
     }
   };
-  console.log(input);
-
-  const { courseCatagory, loding } = useSelector((state) => ({
-    courseCatagory: state.createCourseCategoryReducer.courseCatagory,
-    loading: state.loading,
+  useEffect(()=>{
+dispatch(categoryApi())
+  },[])
+  const { allCategoty } = useSelector((state) => ({
+    allCategoty: state.category.allCategoty,
   }));
-
-  useEffect(() => {
-    dispatch(getCategoryApi());
-  }, []);
 
   return (
     <>
@@ -66,7 +61,7 @@ const Createcource = () => {
                                 type="text"
                                 className="form-control"
                                 name="course_name"
-                                // required
+                                required
                                 onChange={(e) => Handle(e)}
                               />
                             </div>
@@ -78,7 +73,7 @@ const Createcource = () => {
                                 type="number"
                                 name="duration"
                                 className="form-control"
-                                // required
+                                required
                                 onChange={(e) => Handle(e)}
                               />
                             </div>
@@ -91,11 +86,11 @@ const Createcource = () => {
                                 <select
                                   className="col-form-label"
                                   name="course_category"
-                                  id=""
+                                  
                                   onChange={(e) => Handle(e)}
                                 >
                                   <option>choose course category...</option>
-                                  {map(courseCatagory?.results, (item, key) => (
+                                  {map(allCategoty.results, (item) => (
                                     <option value={item.id}>
                                       {item?.course_category_name}
                                       

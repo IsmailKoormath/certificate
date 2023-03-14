@@ -2,8 +2,9 @@ import React from 'react'
 import { BsList } from "react-icons/bs";
 import {Navbar,Nav,Form,Container } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
-import { logoutApi } from "../../Login/useApi";
+// import { logoutApi } from "../../Login/useApi";
 import { useNavigate } from "react-router";
+import { logoutApi } from '../../Store2/Login2/LoginSlice';
 
 
 const Dashboardnav = () => {
@@ -12,7 +13,7 @@ const Dashboardnav = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(logoutApi(navigate));
+    dispatch(logoutApi({navigate}));
   };
 
   return (
@@ -43,6 +44,7 @@ const Dashboardnav = () => {
           <button onClick={() => handleLogout()}>Log out</button>
         </Navbar.Collapse>
       </Container>
+   
     </Navbar>
     </div>
   )

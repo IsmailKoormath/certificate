@@ -15,7 +15,7 @@ import Updatecourcecategory from "./Components/Updatecoursecategory/Updatecource
 import Login from "./Components/Loginpage/Login";
 import CourseSingleView from "./Components/CourseSingleView/CourseSingleView";
 import ViewCourseCatagory from "./Components/viewCourseCatagory/viewCourseCatagory";
-import CreactStudentCourse from "./Components/CreateStudentCourse/CreateStudentCourse"
+import CreactStudentCourse from "./Components/CreateStudentCourse/CreateStudentCourse";
 import Certificate from "./Components/Certificate/Certificate";
 import Star from "./Components/Star/Star";
 
@@ -26,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
+
           <Route path="/dashboard" element={<Dashboard />}></Route>
 
           <Route path="/students" element={<Students />}></Route>
@@ -57,10 +58,14 @@ function App() {
           <Route
             path="/viewCourseCatagory/:id"
             element={<ViewCourseCatagory />}
-          ></Route>  
-          <Route path="/createstudentcourse" element ={<CreactStudentCourse/>}></Route>
-          <Route path="/certificate/:id" element={<Certificate/>}></Route>
-          <Route path="/star" element={<Star/>}></Route>
+          ></Route>
+          <Route
+            path="/createstudentcourse/:id"
+            element={<CreactStudentCourse />}
+          ></Route>
+
+          <Route path="/certificate/:id" element={<Certificate />}></Route>
+          <Route path="/star" element={<Star />}></Route>
         </Routes>
       </Router>
     </div>

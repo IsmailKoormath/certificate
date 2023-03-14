@@ -1,26 +1,21 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { loginApi } from "../../Login/useApi";
 import { Container } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { loginApi } from "../../Store2/Login2/LoginSlice";
 import "./Login.css";
 
-const Login = () => {
-  const { userDetails, loginFail, loading } = useSelector((status) => ({
-    userDetails: status.LoginReducer.userDetails,
-    loginFail: status.LoginReducer.error,
-    loading: status.LoginReducer.loading,
-  }));
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+const Login = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [status, setStatus] = useState();
 
   const handleSubmitLogin = (e) => {
     e.preventDefault();
+    dispatch(loginApi({status,navigate}))
 
-    dispatch(loginApi(status,navigate));
   };
 
   return (
@@ -28,9 +23,9 @@ const Login = () => {
       <Container className="container-login">
         <h3>EDISONVALLEY</h3>
 
-        <form onSubmit={handleSubmitLogin} action="" autoComplete="off">
+        <form onSubmit={handleSubmitLogin} action="">
           <h4>Login</h4>
-          <p>{userDetails?.response}</p>
+          {/* <p>{userDetails?.response}</p> */}
           <label>Username</label>
           <input
             id="username"
@@ -45,12 +40,12 @@ const Login = () => {
             placeholder="Enter Password"
             onChange={(e) => setStatus({ ...status, password: e.target.value })}
           />
-          <p> {loginFail?.error_message}</p>
+          {/* <p> {loginFail?.error_message}</p> */}
 
           <div className="button">
             <input
               type="submit"
-              value={loading ? "loading..." : "Login "}
+              // value={loading ? "loading..." : "Login "}
               className="btn btn-primary"
               style={{ width: " 100%", marginTop: "20px" }}
             />

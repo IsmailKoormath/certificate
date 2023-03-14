@@ -2,9 +2,21 @@ import React from 'react'
 import "./Home.css"
 import { Button,Container,Form,Nav,Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import LoadingSpinner from '../Loading/Loading';
 const Home = () => {
+
+  const [loading,setLoading]=useState(true)
+
+  useEffect(() => {
+   setTimeout(() => {
+      setLoading(false);
+    }, 1000)},[])
+
   return (
-   
+    <>
+   {loading ? <LoadingSpinner/> :
     <div className='home'>
       
         
@@ -83,8 +95,8 @@ const Home = () => {
     </div>
        
        
-    </div>
-    
+    </div>}
+    </>
   )
 }
 

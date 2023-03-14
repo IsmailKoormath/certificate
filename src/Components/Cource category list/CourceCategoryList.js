@@ -1,26 +1,32 @@
-import { map } from "lodash";
+import { map, range } from "lodash";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../Pages/Layout/Layout";
-import createCourseCategoryReducer from "../../Store/courseCategory/reducer";
-import { getCategoryApi } from "../../Store/courseCategory/useApi";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { categoryApi } from "../../Store2/courseCategory2/courseCategorySlice";
+import { useState } from "react";
+import { Col, Row } from "reactstrap";
+import { HiArrowCircleLeft, HiArrowCircleRight } from "react-icons/hi";
 
 const CourceCategoryList = () => {
   const dispatch = useDispatch();
 
-  const { courseCatagory, loading } = useSelector((state) => ({
-    courseCatagory: state.createCourseCategoryReducer.courseCatagory,
-    loading: state.createCourseCategoryReducer.loading,
+  const { allCategoty, loading } = useSelector((state) => ({
+    allCategoty: state.category.allCategoty,
+    loading: state.category.loading,
   }));
+  const courseTable = allCategoty.results;
+
+  const [pages, setPages] = useState(1);
 
   useEffect(() => {
-    dispatch(getCategoryApi());
-  }, [dispatch]);
+    dispatch(categoryApi(pages));
+  }, [dispatch, pages]);
 
-  const courseTable = courseCatagory?.results;
-  console.log(courseTable);
+  const totalPage = Math.ceil(allCategoty?.count / 10);
+  const pageToArray = range(1, totalPage + 1);
+
   return (
     <>
       <Layout>
@@ -60,7 +66,7 @@ const CourceCategoryList = () => {
                 </tr>
               </thead>
               <tbody>
-                {map(courseTable,(item, key) => (
+                {map(courseTable, (item, key) => (
                   <tr key={key}>
                     <td></td>
                     <td>{key + 1}</td>
@@ -80,7 +86,50 @@ const CourceCategoryList = () => {
                 ))}
               </tbody>
             </table>
+           
           </div>
+        </div>
+        <div
+          className="shadow p-3 mb-5 bg-white rounded"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "400px",
+            height: "50px",
+            background: "white",
+            marginLeft: "300px",
+            borderRadius: "20px",
+          }}
+        >
+          <Row>
+            <Col>
+              <HiArrowCircleLeft
+                style={{ cursor: "pointer" }}
+                onClick={() => setPages(pages - 1)}
+              />
+            </Col>
+            {map(pageToArray, (page) => (
+              <Col
+                style={{ cursor: "pointer" }}
+                className={pages === page && "active"}
+                onClick={() => setPages(page)}
+              >
+                {pages}
+              </Col>
+            ))}
+            {/* <Col style={{ cursor: "pointer" }} onClick={() => {
+                    setPages(pages + 1);
+                  }}>{pages }</Col> */}
+            <Col>
+              <HiArrowCircleRight
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setPages(pages + 1);
+                }}
+              />
+            </Col>
+          </Row>
         </div>
       </Layout>
     </>

@@ -1,29 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { FaAward, IconName } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { mainCertificate } from "../../Store/students/useApi";
+import React from "react";
+import {  useSelector } from "react-redux";
 import Border from "../../Images/border.png";
 import Star from "../Star/Star";
 
-
 const Certificate = () => {
-const [model,setModal]=useState(false)
-const params = useParams()
-const dispatch = useDispatch()
 
-useEffect(() => {
-  setModal(true);
-}, [setModal]);
+  const {singleStudent}=useSelector((state)=>({
+  singleStudent:state.students.singleStudent
+  }))
 
-const {studentCertificate,loading}=useSelector((state)=>({
-  studentCertificate:state.CreateReducer?.studentCertificate,
-loading:state.createReducer?.loading
-}))
-console.log(studentCertificate);
-useEffect(()=>{
-  dispatch(mainCertificate(params.id))
-},[dispatch])
 
   return (
     <div
@@ -50,25 +35,21 @@ useEffect(()=>{
           style={{ marginLeft: "-50px", width:"300px"}}
           src={Border}
           className="d-flex justify-content-end"
-        />
+       alt="" />
 
         <div
           style={{
-            // position: "absolute",
             textAlign: "center",
             marginTop:"-100px",
-            // marginTop: "50px",
           }}
         >
-          {/* <img style={{ marginLeft: "5%", width: "20%" }} src="" /> */}
+    
           <div
             style={{
               
               alignItems: "center",
               fontStyle: "paratype",
-             
               justifyContent: "center",
-              // marginLeft: "60px",
             }}
           >
             <h5
@@ -99,9 +80,6 @@ useEffect(()=>{
 
           <div
             style={{
-              // minHeight: "100vh",
-
-              // marginBottom: "30px",
               textAlign: "center",
 
               fontWeight: "500",
@@ -114,7 +92,6 @@ useEffect(()=>{
                   style={{
                     fontWeigt: "400",
                     fontSize: "20px",
-                    // marginTop: "30px",
                     paddingBottom: "4px",
                   }}
                 >
@@ -134,7 +111,7 @@ useEffect(()=>{
                   <div
                     className=""
                     style={{ minWidth: "20px", paddingBottom: "35px" }}
-                  > {studentCertificate?.full_name}</div>
+                  > {singleStudent?.full_name}</div>
                 </h1>
               </b>
             </div>
@@ -165,7 +142,7 @@ useEffect(()=>{
                     minWidth: "5px",
                     fontFamily: "Josefin Sans",
                   }}
-                >{studentCertificate?.start_date}</b>
+                >{singleStudent?.start_date}</b>
                 <b
                   style={{
                     fontSize: "20px",
@@ -173,7 +150,7 @@ useEffect(()=>{
                   }}
                 >
                   
-                  to {studentCertificate?.end_date},
+                  to {singleStudent?.end_date},
                 </b>
                 while showcasing aprofessional<br></br> commandable work
                 attitude throughout the specified time period.
@@ -200,7 +177,7 @@ useEffect(()=>{
         </div>
       </div>
       <div className="last-img"  >
-        <img src={Border} style={{ width:"300px",marginTop:"-150px", transform: "rotate(180deg)", marginLeft:"450px"  }} />
+        <img src={Border} style={{ width:"300px",marginTop:"-150px", transform: "rotate(180deg)", marginLeft:"450px"  }} alt=""/>
       </div>
       <Star />
     </div>

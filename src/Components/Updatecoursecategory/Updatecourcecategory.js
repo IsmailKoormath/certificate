@@ -1,57 +1,47 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Button } from 'reactstrap';
-import Layout from '../../Pages/Layout/Layout';
-import { updateCatagoryApi, viewCategoryApi } from '../../Store/courseCategory/useApi';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button } from "reactstrap";
+import Layout from "../../Pages/Layout/Layout";
+import { updateCategoryApi } from "../../Store2/courseCategory2/courseCategorySlice";
 
 const Updatecourcecategory = () => {
-  const navigate = useNavigate()
-const dispatch = useDispatch()
-const params = useParams()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const params = useParams();
 
-const [data,setData]= useState({
-  course_category_name: "",
-  designation: "",
-  id: ""
-})
+  const [data, setData] = useState({
+    course_category_name: "",
+    designation: "",
+    _id: "",
+  });
 
-const {courseCatagoryUpdate,loading,singleView}= useSelector((state)=>({
-  courseCatagoryUpdate:state.createCourseCategoryReducer.Updatecourcecategory,
-  singleView:state.createCourseCategoryReducer.singleView,
-  loading:state.loading
-}))
-
-useEffect(()=>{
-  dispatch(viewCategoryApi(catId))
-},[dispatch])
-
-useEffect(()=>{
-  setData(singleView)
-},[singleView])
-
-const catId =params.id
-const Handle =(e)=>{
-setData({
-  ...data,
-  [e.target.name]: e.target.value
-})
-
-}
-
-const handleSubmitUpdateCourseCategory=(e)=>{
-e.preventDefault()
-dispatch(updateCatagoryApi(catId,navigate,data))
-navigate("/courcecategorylist")
-}
-
+  const { loading, singleCategory } = useSelector((state) => ({
+    singleCategory: state.category.singleCategory,
+    loading: state.category.loading,
+  }));
   
+  useEffect(() => {
+    setData(singleCategory);
+  }, []);
+
+  const courseCategoryId = params.id;
+
+  const Handle = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmitUpdateCourseCategory = (e) => {
+    e.preventDefault();
+    dispatch(updateCategoryApi({ courseCategoryId, navigate, data }));
+  };
 
   return (
     <>
-    <Layout>
-
-    
+      <Layout>
         <div style={{ height: "900px" }}>
           <div className="container my-5">
             <div className="row justify-content-center my-5">
@@ -59,9 +49,9 @@ navigate("/courcecategorylist")
                 <h1 className="text-center pt-3 text-secondery h2">
                   Edit your Details
                 </h1>
-                <form onSubmit={handleSubmitUpdateCourseCategory}
+                <form
+                  onSubmit={handleSubmitUpdateCourseCategory}
                   style={{ padding: "10px" }}
-                  
                 >
                   <div className="form-group">
                     <label className="col-form-label">
@@ -71,7 +61,7 @@ navigate("/courcecategorylist")
                       type="text"
                       className="form-control"
                       requied={true}
-                      onChange={(e)=>Handle(e)}
+                      onChange={(e) => Handle(e)}
                       value={data?.course_category_name}
                       name="course_category_name"
                     />
@@ -84,27 +74,12 @@ navigate("/courcecategorylist")
                       requied={true}
                       type="text"
                       className="form-control"
-                      
+                      onChange={(e) => Handle(e)}
                       value={data?.designation}
                       name="designation"
                     />
                   </div>
 
-                  {/* <input
-                    style={{
-                      backgroundColor: "MediumSeaGreen",
-                      color: "white",
-                      padding: "3px 20px 3px 20px",
-                      borderRadius: "5px",
-                    }}
-                    type="button"
-                    className="btn  my-3"
-                    value="Update"
-                    // onChange={(handleSubmitUpdateCourseCategory) => {
-                    //   navigate("/CourseView");
-                    // }}
-                    onClick={() => HandleSubmitUpdateCourseCategory()}
-                  /> */}
                   <div
                     style={{
                       paddingTop: "15px",
@@ -120,9 +95,8 @@ navigate("/courcecategorylist")
                         padding: "3px 20px 3px 20px",
                         borderRadius: "5px",
                       }}
-                      
-                      onClick={()=>{
-                        navigate('/courcecategorylist')
+                      onClick={() => {
+                        navigate("/courcecategorylist");
                       }}
                     >
                       back
@@ -144,9 +118,9 @@ navigate("/courcecategorylist")
             </div>
           </div>
         </div>
-        </Layout>
+      </Layout>
     </>
-  )
-}
+  );
+};
 
-export default Updatecourcecategory
+export default Updatecourcecategory;

@@ -13,7 +13,7 @@ export const loginApi = (input, navigate) => {
     dispatch(loginRequest(input));
 
     try {
-      const res = await axiosApi.post(`/account/login/`, input);
+      const res = await axiosApi.post(`/api/auth`, input);
 
       console.log(res);
 
@@ -36,7 +36,7 @@ export const logoutApi = (navigate) => {
       const token = localStorage.getItem("token");
 
       // console.log(token);
-      const user = await axiosApi.post(`/account/logout/`, token);
+      const user = await axiosApi.post(`/api/auth/logout`, token);
 
       console.log(user);
 

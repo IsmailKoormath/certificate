@@ -1,49 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-
 import { Container, Card, Button, Form, Row, Col, CardBody } from "reactstrap";
 import Layout from "../../Pages/Layout/Layout";
-import { singleViewApi, UpdateStudentApi } from "../../Store/students/useApi";
+import { singleStudentApi, updateStudentApi } from "../../Store2/Students2/studentSlice";
 
 const Updatestudents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
+
   const [store, setStore] = useState();
 
-  const { UpdateStudent, loading, singleView } = useSelector((state) => ({
-    Updatestudent: state.CreateReducer.UpdateStudent,
-    singleView: state.CreateReducer.singleView,
-    loading: state.loading,
+  const {loading,singleStudent } = useSelector((state) => ({
+    singleStudent: state.students.singleStudent,
+    loading: state.students.loading,
   }));
+
   useEffect(() =>{
-    dispatch(singleViewApi(studentId))
-  },[dispatch]);
+    setStore(singleStudent);
+  },[]);
 
-  const studentId = params.id;
-  console.log(params)
-
-  useEffect(() => {
-    setStore(singleView);
-  }, [singleView]);
-
-
-  // useEffect(() => {
-  //     dispatch(UpdateStudentApi(studentId, navigate, store));
-  //   }, [dispatch]);
-
-  const Handle = (e,studentId) => {
+  const Handle = (e) => {
     setStore({
       ...store,
       [e.target.name]: e.target.value,
     });
   };
 
+  const studentId= params.id
+
   const HandleStudentUpdate = () => {
-    console.log('studentId', params.id)
-    dispatch(UpdateStudentApi(studentId, navigate, store));
+    dispatch(updateStudentApi({studentId, navigate, store}));
   };
+
   return (
     <>
       <Layout>

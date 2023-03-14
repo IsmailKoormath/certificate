@@ -1,5 +1,5 @@
 import { map } from "lodash";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,12 +9,7 @@ import { Link } from "react-router-dom";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { CardBody, CardTitle, Input } from "reactstrap";
 import Layout from "../../Pages/Layout/Layout";
-import {
-  createStudentCourseApi,
-  studentApi,
-} from "../../Store/students/useApi";
-import { useEffect } from "react";
-import { courseApi } from "../../Store/course/useApi";
+import { createStudentCourseApi } from "../../Store2/studentCourse/studentCourseSlice";
 
 const CreateStudentCourse = () => {
 
@@ -24,13 +19,13 @@ const CreateStudentCourse = () => {
 
   const [stdCourse, setStdCourse] = useState({});
 
-  const { student, course, loading } = useSelector((state) => ({
-    student: state.CreateReducer.allStudent,
-    course: state.CreateCourseReducer.allcourse,
-
+  const { allStudents, allCourse, loading } = useSelector((state) => ({
+    allStudents: state.students.allStudents,
+    allCourse: state.course.allCourse,
     loading: state.loading,
   }));
-  console.log(student);
+
+
   const Handle = (e) => {
     setStdCourse({
       ...stdCourse,
@@ -42,16 +37,13 @@ const CreateStudentCourse = () => {
 
   const handleSubmitStdCourseCreate = (e) => {
     e.preventDefault();
-  console.log("stdCourse");
-    dispatch(createStudentCourseApi(navigate,stdCourse,catId));
+    dispatch(createStudentCourseApi({navigate,stdCourse,catId}));
   };
-  useEffect(() => {
-    dispatch(studentApi());
-  }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(courseApi());
-  }, [dispatch]);
+
+const students = allStudents.results
+const courses = allCourse.results
+
 
   return (
     <div>
@@ -92,7 +84,7 @@ const CreateStudentCourse = () => {
                               <option className="text-muted">
                                 select a student...
                               </option>
-                              {map(student?.results, (item, key) => (
+                              {map(students, (item, key) => (
                                 <option value={item.id}>
                                   {item.full_name}
                                 </option>
@@ -119,7 +111,7 @@ const CreateStudentCourse = () => {
                               onChange={(e) => Handle(e)}
                             >
                               <option>select your course...</option>
-                              {map(course?.results, (item, key) => (
+                              {map(courses, (item, key) => (
                                 <option value={item.id}>
                                   {item.course_name}
                                 </option>

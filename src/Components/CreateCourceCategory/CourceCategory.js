@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import {  useNavigate } from "react-router-dom";
 import { Button } from "reactstrap";
 import Layout from "../../Pages/Layout/Layout";
-import { CourseCategoryApi } from "../../Store/courseCategory/useApi";
+import { createCategoryApi } from "../../Store2/courseCategory2/courseCategorySlice";
 
 const CourceCategory = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const CourceCategory = () => {
   const handleCourseCategory = (e) => {
     e.preventDefault();
     if (input) {
-      dispatch(CourseCategoryApi(input, navigate));
+      dispatch(createCategoryApi({input,navigate}));
     }
   };
   return (

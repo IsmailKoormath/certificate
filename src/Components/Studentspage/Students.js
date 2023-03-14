@@ -1,37 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { NavItem } from "reactstrap";
-import {map} from "lodash";
+import { map, range } from "lodash";
 import Layout from "../../Pages/Layout/Layout";
-import CreateReducer from "../../Store/students/reducer";
-import { studentApi } from "../../Store/students/useApi";
 import { Link } from "react-router-dom";
+import moment from "moment";
+import { studentsApi } from "../../Store2/Students2/studentSlice";
+import { Col, Row } from "react-bootstrap";
+import { HiArrowCircleLeft, HiArrowCircleRight } from "react-icons/hi";
+import LoadingSpinner from "../Loading/Loading";
+
 
 
 const Students = () => {
   const dispatch = useDispatch();
 
-  const {allStudent,loading} = useSelector((state) => ({
-    allStudent: state.CreateReducer.allStudent,
-    loading: state.CreateReducer.loading,
+  const { allStudents, loading, pageCount } = useSelector((state) => ({
+    allStudents: state.students.allStudents,
+    loading: state.students.loading,
   }));
-  console.log(allStudent);
- 
+
+  const tableData = allStudents.results;
+  console.log(allStudents);
+
+  const [pages, setPages] = useState(1);
+
   useEffect(() => {
-    dispatch(studentApi());
-  }, []);
+    dispatch(studentsApi(pages));
+  }, [dispatch, pages]);
+
+  const totalPage = Math.round(pageCount / 10);
+  const pageToArray = range(1, totalPage + 1);
 
  
-
-  const tableData = allStudent?.results;
-
-  // console.log(tableData);
-
+   
 
   return (
     <>
       <Layout>
-        <div style={{marginLeft:"20px"}}>
+     
+        <div style={{ marginLeft: "20px" }}>
+          {loading && <LoadingSpinner/>}
           <h4 style={{ textAlign: "center" }}>STUDENTS</h4>
           <div
             className="table-wrapper"
@@ -73,29 +81,73 @@ const Students = () => {
                 </tr>
               </thead>
               <tbody>
-                {map(tableData,(item, key) =>(
-                <tr key={key}>
-                  <th scope="row"></th>
-                  <td>{item?.full_name}</td>
-                 
-                  <td>{item?.phone}</td>
-                  <td>{item?.email}</td>
-                  <td>{item?.start_date}</td>
-                  <td>{item?.dob}</td>
-                  <td>{item?.designation}</td>
-                  <td>{item?.photo}</td>
-                  <td>
-                    <Link to={`/studentview/${item.id}`}>
-                    <button stle={{ color: "black", backgroundColor: "white" }}>
-                      View
-                    </button>
-                    </Link>
-                  </td>
-                </tr>
+                {map(tableData, (item, key) => (
+                  <tr key={key}>
+                    <td>{key+1}</td>
+                    <td>{item?.full_name}</td>
+                    <td>{item?.phone}</td>
+                    <td>{item?.email}</td>
+                    <td>{moment(item?.start_date).format("Do MMMM YYYY")}</td>
+                    <td>{moment(item?.dob).format("Do MMMM YYYY")}</td>{" "}
+                    {/*moment().format('MMMM Do YYYY, h:mm:ss a')*/}
+                    <td>{item?.designation}</td>
+                    <td>{item?.photo}</td>
+                    <td>
+                      <Link to={`/studentview/${item.id}`}>
+                        <button
+                          stle={{ color: "black", backgroundColor: "white" }}
+                        >
+                          View
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
                 ))}
               </tbody>
             </table>
           </div>
+        </div>
+        <div
+          className="shadow p-3 mb-5 bg-white rounded"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "400px",
+            height: "50px",
+            background: "white",
+            marginLeft: "300px",
+            borderRadius: "20px",
+          }}
+        >
+          <Row>
+            <Col>
+              <HiArrowCircleLeft
+                style={{ cursor: "pointer" }}
+                onClick={() => setPages(pages - 1)}
+              />
+            </Col>
+            {map(pageToArray, (page) => (
+              <Col
+                style={{ cursor: "pointer" }}
+                className={pages === page && "active"}
+                onClick={() => setPages(page)}
+              >
+                {pages}
+              </Col>
+            ))}
+            {/* <Col style={{ cursor: "pointer" }} onClick={() => {
+                    setPages(pages + 1);
+                  }}>{pages }</Col> */}
+            <Col>
+              <HiArrowCircleRight
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setPages(pages + 1);
+                }}
+              />
+            </Col>
+          </Row>
         </div>
       </Layout>
     </>
